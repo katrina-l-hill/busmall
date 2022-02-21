@@ -27,6 +27,16 @@ let imgTwenty = document.getElementById('img-twenty');
 let resultsBtn = document.getElementById('show-results-button');
 let showResults = document.getElementById('display-results-list');
 
+// Constructor
+
+function Products(name, fileExtension = 'jpg') {
+  this.name = name;
+  this.views = 0;
+  this.src = `img/${name}.${file.Extension}`;
+
+  allProducts.push(this);
+}
+
 
 
 
