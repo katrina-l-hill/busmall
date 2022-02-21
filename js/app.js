@@ -24,6 +24,9 @@ let imgEighteen = document.getElementById('img-eighteen');
 let imgNineteen = document.getElementById('img-nineteen');
 let imgTwenty = document.getElementById('img-twenty');
 
+let resultsBtn = document.getElementById('show-results-button');
+let showResults = document.getElementById('display-results-list');
+
 
 
 
