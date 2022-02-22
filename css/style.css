@@ -1,1 +1,30 @@
+.grid-container {
+  width: auto;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 100px 50px 100px;
+  grid-auto-rows: minmax(200px, auto);
+  column-gap: 10px;
+  row-gap: 15px;
+}
 
+/* .grid-item1{
+  column-gap: 10px;
+  row-gap: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.grid-item2{
+  column-gap: 10px;
+  row-gap: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.grid-item3{
+  column-gap: 10px;
+  row-gap: 15px;
+  display: flex;
+  justify-content: space-between;
+} */
