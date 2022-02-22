@@ -6,6 +6,8 @@ let votesAllowed = 25;
 // Product storage
 let allProducts = [];
 
+let previousStepPhotos = [];
+
 // DOM references
 
 let myContainer = document.getElementById('container');
@@ -29,6 +31,9 @@ let imgThree = document.getElementById('img-three');
 // let imgEighteen = document.getElementById('img-eighteen');
 // let imgNineteen = document.getElementById('img-nineteen');
 // let imgTwenty = document.getElementById('img-twenty');
+
+// Canvas Element for Chart.js
+let ctx = document.getElementById('my-chart');
 
 let resultsBtn = document.getElementById('show-results-button');
 let showResults = document.getElementById('display-results-list');
@@ -100,11 +105,27 @@ function renderImgs() {
   {
     let randomIndex = getRandomIndex();
     //ensure index is unique
-    while(contains(indexes, randomIndex))
+    
+    // Testing conditions
+    // if(contains(indexes, randomIndex))
+    // {
+    //   console.log("repeat picture in set");
+    // }
+    // if(contains(previousStepPhotos, randomIndex))
+    // {
+    //   console.log("previous set repeat");
+    // }
+
+    while(contains(indexes, randomIndex) || contains(previousStepPhotos, randomIndex))
     {
       randomIndex = getRandomIndex();
     }
     indexes.push(randomIndex);
+  }
+
+  previousStepPhotos = [];
+  for(let i = 0; i < indexes.length; i++){
+    previousStepPhotos.push(indexes[i])
   }
   
   // For each of the three images, increment its property of times it has been shown by one.
