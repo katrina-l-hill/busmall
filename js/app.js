@@ -1,5 +1,11 @@
 'use strict'
 
+// Glbal variables
+let votesAllowed = 25;
+
+// Product storage
+let allProducts = [];
+
 // DOM references
 
 let myContainer = document.getElementById('container');
@@ -33,14 +39,16 @@ let showResults = document.getElementById('display-results-list');
 //     File path of image
 //     Times the image has been shown
 
-
+// Constructor function.
 function Product(name, fileExtension = 'jpg') {
   this.name = name;
   this.views = 0;
-  this.src = `img/${name}.${file.Extension}`;
+  this.src = `img/${name}.${fileExtension}`;
 
   allProducts.push(this);
 }
+
+// Instantiation
 
 new Product('bag');
 new Product('banana');
