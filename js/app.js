@@ -158,3 +158,7 @@ function handleShowResults(event) {
     }
   }
 }
+
+myContainer.addEventListener('click', handleClick);
+
+resultsBtn.addEventListener('click', handleShowResults);
