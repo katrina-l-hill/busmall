@@ -43,6 +43,7 @@ let showResults = document.getElementById('display-results-list');
 function Product(name, fileExtension = 'jpg') {
   this.name = name;
   this.views = 0;
+  this.clicks = 0;
   this.src = `img/${name}.${fileExtension}`;
 
   allProducts.push(this);
@@ -64,7 +65,7 @@ new Product('pen');
 new Product('pet-sweep');
 new Product('scissors');
 new Product('shark');
-new Product('sweep');
+new Product('sweep', 'png');
 new Product('tauntaun');
 new Product('unicorn');
 new Product('water-can');
@@ -83,52 +84,42 @@ function getRandomIndex() {
   return Math.floor(Math.random() * allProducts.length);
 }
 
+function contains(array, item){
+  for(let i = 0; i < array.length; i++)
+  {
+    if(array[i] === item)
+      return true;
+  }
+  return false;
+}
+
 // render images
 function renderImgs() {
-  let productOneIndex = getRandomIndex();
-  let productTwoIndex = getRandomIndex();
-  let productThreeIndex = getRandomIndex();
-  // let productFourIndex = getRandomIndex();
-  // let productFiveIndex = getRandomIndex();
-  // let productSixIndex = getRandomIndex();
-  // let productSevenIndex = getRandomIndex();
-  // let productEightIndex = getRandomIndex();
-  // let productNineIndex = getRandomIndex();
-  // let productTenIndex = getRandomIndex();
-  // let productElevenIndex = getRandomIndex();
-  // let productTwelveIndex = getRandomIndex();
-  // let productThirteenIndex = getRandomIndex();
-  // let productFourteenIndex = getRandomIndex();
-  // let productFifteenIndex = getRandomIndex();
-  // let productSixteenIndex = getRandomIndex();
-  // let productSeventeenIndex = getRandomIndex();
-  // let productEighteenIndex = getRandomIndex();
-  // let productNineteenIndex = getRandomIndex();
-  // let productTwentyIndex = getRandomIndex();
+  let indexes = [];
+  for(let i = 0; i < 3; i++)
+  {
+    let randomIndex = getRandomIndex();
+    //ensure index is unique
+    while(contains(indexes, randomIndex))
+    {
+      randomIndex = getRandomIndex();
+    }
+    indexes.push(randomIndex);
+  }
+  
+  // For each of the three images, increment its property of times it has been shown by one.
 
+  imgOne.src = allProducts[indexes[0]].src;
+  imgOne.alt = allProducts[indexes[0]].name;
+  allProducts[indexes[0]].views++;
 
-// For each of the three images, increment its property of times it has been shown by one.
+  imgTwo.src = allProducts[indexes[1]].src;
+  imgTwo.alt = allProducts[indexes[1]].name;
+  allProducts[indexes[1]].views++;
 
-while(productOneIndex === productTwoIndex) {
-  productTwoIndex = getRandomIndex();
-}
-
-while(productTwoIndex === productThreeIndex) {
-productThreeIndex = getRandomIndex();
-}
-
-imgOne.src = allProducts[productOneIndex].src;
-imgOne.alt = allProducts[productOneIndex].name;
-allProducts[productOneIndex].views++;
-
-imgTwo.src = allProducts[productTwoIndex].src;
-imgTwo.alt = allProducts[productTwoIndex].name;
-allProducts[productTwoIndex].views++;
-
-imgThree.src = allProducts[productThreeIndex].src;
-imgThree.alt = allProducts[productThreeIndex].name;
-allProducts[productThreeIndex].views++;
-
+  imgThree.src = allProducts[indexes[2]].src;
+  imgThree.alt = allProducts[indexes[2]].name;
+  allProducts[indexes[2]].views++;
 }
 
 renderImgs();
@@ -139,39 +130,40 @@ function handleClick(event) {
   votesAllowed--;
 
   let imgClicked = event.target.alt; {
-    
-  for(let i = 0; i < allProducts.length; i++) {
-    if(imgClicked === allProducts[i].name) {
-      allProducts[i].clicks++;
+
+    for (let i = 0; i < allProducts.length; i++) {
+      if (imgClicked === allProducts[i].name) {
+        allProducts[i].clicks++;
+      }
+    }
+
+    // Once the users ‘clicks’ a product, generate three new products for the user to pick from.
+    // re-render 3 new Product images
+
+    renderImgs();
+
+
+    // By default, the user should be presented with 25 rounds of voting before ending the session. After voting rounds have been completed, remove the event listeners on the product.
+    if (votesAllowed === 0) {
+      myContainer.removeEventListener('click', handleClick);
     }
   }
-
-// Once the users ‘clicks’ a product, generate three new products for the user to pick from.
-// re-render 3 new Product images
-
-renderImgs();
-
-
-// By default, the user should be presented with 25 rounds of voting before ending the session. After voting rounds have been completed, remove the event listeners on the product.
- if(votesAllowed === 0) {
-   myContainer.removeEventListener('click', handleClick);
- }
 }
 
 // Button to show results, render list items. Create a property attached to the constructor function itself that keeps track of all the products that are currently being considered.
 
 function handleShowResults(event) {
-// if no more results, then render a list
+  // if no more results, then render a list
 
-  if(votesAllowed === 0) {
-    for(let i = 0; i < allProducts.length; i++) {
+  if (votesAllowed === 0) {
+    for (let i = 0; i < allProducts.length; i++) {
       let li = document.createElement('li');
       li.textContent = `${allProducts[i].name} was viewed ${allProducts[i].views} times, and was voted for ${allProducts[i].clicks} times.`;
+      showResults.appendChild(li);
     }
   }
 }
 
 // What you want to grab to listen to
 myContainer.addEventListener('click', handleClick);
-
 resultsBtn.addEventListener('click', handleShowResults);
