@@ -139,6 +139,8 @@ function handleClick(event) {
   votesAllowed--;
 
   let imgClicked = event.target.alt; {
+    
+  for(let i = 0; i < allProducts.length; i++) {
     if(imgClicked === allProducts[i].name) {
       allProducts[i].clicks++;
     }
@@ -150,10 +152,6 @@ function handleClick(event) {
 renderImgs();
 
 
-
-
-
-
 // By default, the user should be presented with 25 rounds of voting before ending the session. After voting rounds have been completed, remove the event listeners on the product.
  if(votesAllowed === 0) {
    myContainer.removeEventListener('click', handleClick);
@@ -161,6 +159,7 @@ renderImgs();
 }
 
 // Button to show results, render list items. Create a property attached to the constructor function itself that keeps track of all the products that are currently being considered.
+
 function handleShowResults(event) {
 // if no more results, then render a list
 
