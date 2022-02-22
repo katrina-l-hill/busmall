@@ -127,7 +127,23 @@ renderImgs();
 
 // Attach an event listener to the section of the HTML page where the images are going to be displayed.
 
+function handleClick(event) {
+  votesAllowed--;
+
+  let imgClicked = event.target.alt; {
+    if(imgClicked === allProducts[i].name) {
+      allProducts[i].clicks++;
+    }
+  }
 
 // Once the users ‘clicks’ a product, generate three new products for the user to pick from.
+// re-render 3 new Product images
+
+renderImgs();
 
 
+// User can only vote in 25 rounds - stop clicks
+ if(votesAllowed === 0) {
+   myContainer.removeEventListener('click', handleClick);
+ }
+}
