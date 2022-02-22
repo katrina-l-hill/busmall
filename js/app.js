@@ -147,3 +147,14 @@ renderImgs();
    myContainer.removeEventListener('click', handleClick);
  }
 }
+
+// Button to show results, render list items
+function handleShowResults(event) {
+
+  if(votesAllowed === 0) {
+    for(let i = 0; i < allProducts.length; i++) {
+      let li = document.createElement('li');
+      li.textContent = `${allProducts[i].name} was viewed ${allProducts[i].views} times, and was voted for ${allProducts[i].clicks} times.`;
+    }
+  }
+}
