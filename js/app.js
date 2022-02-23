@@ -14,6 +14,7 @@ let myContainer = document.getElementById('container');
 let imgOne = document.getElementById('img-one');
 let imgTwo = document.getElementById('img-two');
 let imgThree = document.getElementById('img-three');
+
 // let imgFour = document.getElementById('img-four');
 // let imgFive = document.getElementById('img-five');
 // let imgSix = document.getElementById('img-six');
@@ -149,6 +150,14 @@ renderImgs();
 function handleClick(event) {
   votesAllowed--;
 
+  // var imgs = document.getElementsByClassName('grid-img');
+  // for(let i = 0; i < imgs.length; i++)
+  // {
+  //   imgs[i].classList.remove('img-highlight');
+  // }
+  // event.target.classList.add('img-highlight');
+
+
   let imgClicked = event.target.alt; {
 
     for (let i = 0; i < allProducts.length; i++) {
@@ -166,10 +175,9 @@ function handleClick(event) {
     // By default, the user should be presented with 25 rounds of voting before ending the session. After voting rounds have been completed, remove the event listeners on the product.
     if (votesAllowed === 0) {
       myContainer.removeEventListener('click', handleClick);
+      // Call to render chart function once voting has ended
+      renderChart();
     }
-
-    // Call to render chart function once voting has ended
-    renderChart();
   }
 }
 
@@ -191,6 +199,7 @@ function handleClick(event) {
 
 // Function to render the chart once voting is done
 function renderChart() {
+  console.log("rendering chart...");
   // array to hold product names for bottom label of chart
   let productNames = [];
 
@@ -244,8 +253,10 @@ function renderChart() {
   const productChart = new Chart(ctx, chartObject);
 }
 
-  // What you want to grab to listen to
-  myContainer.addEventListener('click', handleClick);
+// What you want to grab to listen to
+imgOne.addEventListener('click', handleClick);
+imgTwo.addEventListener('click', handleClick);
+imgThree.addEventListener('click', handleClick);
 
   // Commented the Event Listener out for chartjs lab
   // resultsBtn.addEventListener('click', handleShowResults);
