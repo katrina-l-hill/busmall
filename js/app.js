@@ -182,6 +182,15 @@ function handleClick(event) {
       renderChart();
     }
   }
+
+// Local storage begins here:
+// Step 1: Stringify the data
+let stringifiedProducts = JSON.stringify(allProducts);
+console.log('Stringified Products', stringifiedProducts);
+
+// Step 2: Set the data into local storage
+localStorage.setItem('products', stringifiedProducts);
+
 }
 
 // Button to show results, render list items. Create a property attached to the constructor function itself that keeps track of all the products that are currently being considered.
