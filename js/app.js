@@ -43,6 +43,11 @@ console.log('retrieved products', retrievedProducts);
 
 // Local storage Step 4: Pass the data for our code to read:
 let parsedProducts = JSON.parse(retrievedProducts);
+console.log(parsedProducts);
+
+// for (let i = 0; i < parsedProducts.length; i++) {
+//   console.log(parsedProducts[i]);
+// }
 
 // Commented these out for chart.js lab
 
@@ -66,36 +71,36 @@ function Product(name, fileExtension = 'jpg') {
 }
 
 // Step 5: Use the data that came out of local storage:
-if(retrievedProducts) {
+if (retrievedProducts) {
   allProducts = parsedProducts;
 } else {
 
 
 
-// Instantiation
+  // Instantiation
 
-new Product('bag');
-new Product('banana');
-new Product('bathroom');
-new Product('boots');
-new Product('breakfast');
-new Product('bubblegum');
-new Product('chair');
-new Product('cthulhu');
-new Product('dog-duck');
-new Product('dragon');
-new Product('pen');
-new Product('pet-sweep');
-new Product('scissors');
-new Product('shark');
-new Product('sweep', 'png');
-new Product('tauntaun');
-new Product('unicorn');
-new Product('water-can');
-new Product('wine-glass');
-new Product('wireframe', 'png');
+  new Product('bag');
+  new Product('banana');
+  new Product('bathroom');
+  new Product('boots');
+  new Product('breakfast');
+  new Product('bubblegum');
+  new Product('chair');
+  new Product('cthulhu');
+  new Product('dog-duck');
+  new Product('dragon');
+  new Product('pen');
+  new Product('pet-sweep');
+  new Product('scissors');
+  new Product('shark');
+  new Product('sweep', 'png');
+  new Product('tauntaun');
+  new Product('unicorn');
+  new Product('water-can');
+  new Product('wine-glass');
+  new Product('wireframe', 'png');
 
-console.log(allProducts);
+  console.log(allProducts);
 }
 
 // Executable code
@@ -173,37 +178,35 @@ function handleClick(event) {
   // event.target.classList.add('img-highlight');
 
 
-  let imgClicked = event.target.alt; {
+  let imgClicked = event.target.alt;
 
-    for (let i = 0; i < allProducts.length; i++) {
-      if (imgClicked === allProducts[i].name) {
-        allProducts[i].clicks++;
-      }
-    }
-
-    // Once the users ‘clicks’ a product, generate three new products for the user to pick from.
-    // re-render 3 new Product images
-
-    renderImgs();
-
-
-    // By default, the user should be presented with 25 rounds of voting before ending the session. After voting rounds have been completed, remove the event listeners on the product.
-    if (votesAllowed === 0) {
-      imgOne.removeEventListener('click', handleClick);
-      imgTwo.removeEventListener('click', handleClick);
-      imgThree.removeEventListener('click', handleClick);
-      // Call to render chart function once voting has ended
-      renderChart();
+  for (let i = 0; i < allProducts.length; i++) {
+    if (imgClicked === allProducts[i].name) {
+      allProducts[i].clicks++;
     }
   }
 
-// Local storage begins here:
-// Local storage Step 1: Stringify the data:
-let stringifiedProducts = JSON.stringify(allProducts);
-console.log('Stringified Products', stringifiedProducts);
+  // Once the users ‘clicks’ a product, generate three new products for the user to pick from.
+  // re-render 3 new Product images
 
-// Local storage Step 2: Set the data to local storage:
-localStorage.setItem('products', stringifiedProducts);
+  renderImgs();
+
+
+  // By default, the user should be presented with 25 rounds of voting before ending the session. After voting rounds have been completed, remove the event listeners on the product.
+  if (votesAllowed === 0) {
+    imgOne.removeEventListener('click', handleClick);
+    imgTwo.removeEventListener('click', handleClick);
+    imgThree.removeEventListener('click', handleClick);
+    // Call to render chart function once voting has ended
+    renderChart();
+    // Local storage begins here:
+    // Local storage Step 1: Stringify the data:
+    let stringifiedProducts = JSON.stringify(allProducts);
+    console.log('Stringified Products', stringifiedProducts);
+
+    // Local storage Step 2: Set the data to local storage:
+    localStorage.setItem('products', stringifiedProducts);
+  }
 
 }
 
@@ -304,7 +307,7 @@ function renderChart() {
         hoverBorderColor: 'black'
       }]
     },
-  
+
   };
   const productChart = new Chart(ctx, chartObject);
   const productChart2 = new Chart(ctx2, chartObjectOne);
