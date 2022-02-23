@@ -35,8 +35,10 @@ let imgThree = document.getElementById('img-three');
 // Canvas Element for Chart.js
 let ctx = document.getElementById('my-chart');
 
-let resultsBtn = document.getElementById('show-results-button');
-let showResults = document.getElementById('display-results-list');
+// Commented these out for chart.js lab
+
+// let resultsBtn = document.getElementById('show-results-button');
+// let showResults = document.getElementById('display-results-list');
 
 // Create a constructor function that creates an object associated with each product, and has the following properties:
 
