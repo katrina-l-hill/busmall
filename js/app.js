@@ -252,46 +252,47 @@ function renderChart() {
     }
   };
 
-  let chartObject = {
-    type: 'polarArea',
-    data: {
-      labels: productNames,
-      datasets: [{
-        label: '# of Clicks',
-        data: productClicks,
-        backgroundColor: [
-          'green'
-        ],
-        borderColor: [
-          'green'
-        ],
-        borderWidth: 1,
-        hoverBorderColor: 'black'
-      },
-      {
-        label: '# of Views',
-        data: productViews,
-        backgroundColor: [
-          'blue'
-        ],
-        borderColor: [
-          'blue'
-        ],
-        borderWidth: 1,
-        hoverBorderColor: 'black'
-      }]
-    },
-    options: {
-      // scales: {
-      //   y: {
-      //     beginAtZero: true
-      //   }
-      // }
-    }
-  };
+  // let chartObjectOne = {
+  //   type: 'polarArea',
+  //   data: {
+  //     labels: productNames,
+  //     datasets: [{
+  //       label: '# of Clicks',
+  //       data: productClicks,
+  //       backgroundColor: [
+  //         'green'
+  //       ],
+  //       borderColor: [
+  //         'green'
+  //       ],
+  //       borderWidth: 1,
+  //       hoverBorderColor: 'black'
+  //     },
+  //     {
+  //       label: '# of Views',
+  //       data: productViews,
+  //       backgroundColor: [
+  //         'blue'
+  //       ],
+  //       borderColor: [
+  //         'blue'
+  //       ],
+  //       borderWidth: 1,
+  //       hoverBorderColor: 'black'
+  //     }]
+  //   },
+  //   options: {
+  //     // scales: {
+  //     //   y: {
+  //     //     beginAtZero: true
+  //     //   }
+  //     // }
+  //   }
+  // };
 
 
   const productChart = new Chart(ctx, chartObject);
+  // const productChart = new Chart(ctx, chartObjectOne);
 }
 
 // What you want to grab to listen to
