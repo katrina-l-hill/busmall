@@ -175,17 +175,19 @@ function handleClick(event) {
 
 // Button to show results, render list items. Create a property attached to the constructor function itself that keeps track of all the products that are currently being considered.
 
-function handleShowResults(event) {
-  // if no more results, then render a list
+// Commented this function out for chartjs lab
 
-  if (votesAllowed === 0) {
-    for (let i = 0; i < allProducts.length; i++) {
-      let li = document.createElement('li');
-      li.textContent = `${allProducts[i].name} was viewed ${allProducts[i].views} times, and was voted for ${allProducts[i].clicks} times.`;
-      showResults.appendChild(li);
-    }
-  }
-}
+// function handleShowResults(event) {
+//   // if no more results, then render a list
+
+//   if (votesAllowed === 0) {
+//     for (let i = 0; i < allProducts.length; i++) {
+//       let li = document.createElement('li');
+//       li.textContent = `${allProducts[i].name} was viewed ${allProducts[i].views} times, and was voted for ${allProducts[i].clicks} times.`;
+//       showResults.appendChild(li);
+//     }
+//   }
+// }
 
 // Function to render the chart once voting is done
 function renderChart() {
@@ -264,4 +266,6 @@ function renderChart() {
 
   // What you want to grab to listen to
   myContainer.addEventListener('click', handleClick);
-  resultsBtn.addEventListener('click', handleShowResults);
+
+  // Commented the Event Listener out for chartjs lab
+  // resultsBtn.addEventListener('click', handleShowResults);
