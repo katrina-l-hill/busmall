@@ -37,11 +37,11 @@ let imgThree = document.getElementById('img-three');
 let ctx = document.getElementById('my-chart');
 let ctx2 = document.getElementById('my-chart2');
 
-// Step 3: Get data out of local storage:
+// Local storage Step 3: Get data out of local storage:
 let retrievedProducts = localStorage.getItem('products');
 console.log('retrieved products', retrievedProducts);
 
-// Step 4: Pass the data for our code to read:
+// Local storage Step 4: Pass the data for our code to read:
 let parsedProducts = JSON.parse(retrievedProducts);
 
 // Commented these out for chart.js lab
@@ -198,11 +198,11 @@ function handleClick(event) {
   }
 
 // Local storage begins here:
-// Step 1: Stringify the data
+// Local storage Step 1: Stringify the data:
 let stringifiedProducts = JSON.stringify(allProducts);
 console.log('Stringified Products', stringifiedProducts);
 
-// Step 2: Set the data into local storage
+// Local storage Step 2: Set the data to local storage:
 localStorage.setItem('products', stringifiedProducts);
 
 }
