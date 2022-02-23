@@ -241,7 +241,7 @@ function renderChart() {
     }
   };
 
-  const productChart = new prodChart(ctx, chartObject);
+  const productChart = new Chart(ctx, chartObject);
 }
 
   // What you want to grab to listen to
