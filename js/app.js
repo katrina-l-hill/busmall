@@ -6,7 +6,7 @@ let votesAllowed = 25;
 // Product storage
 let allProducts = [];
 
-let previousStepPhotos = [];
+let previousStepPhotoIndexes = [];
 
 // DOM references
 
@@ -100,7 +100,7 @@ function contains(array, item){
 
 // render images
 function renderImgs() {
-  let indexes = [];
+  let currentPhotoIndexes = [];
   for(let i = 0; i < 3; i++)
   {
     let randomIndex = getRandomIndex();
@@ -116,31 +116,31 @@ function renderImgs() {
     //   console.log("previous set repeat");
     // }
 
-    while(contains(indexes, randomIndex) || contains(previousStepPhotos, randomIndex))
+    while(contains(currentPhotoIndexes, randomIndex) || contains(previousStepPhotoIndexes, randomIndex))
     {
       randomIndex = getRandomIndex();
     }
-    indexes.push(randomIndex);
+    currentPhotoIndexes.push(randomIndex);
   }
 
-  previousStepPhotos = [];
-  for(let i = 0; i < indexes.length; i++){
-    previousStepPhotos.push(indexes[i])
+  previousStepPhotoIndexes = [];
+  for(let i = 0; i < currentPhotoIndexes.length; i++){
+    previousStepPhotoIndexes.push(currentPhotoIndexes[i])
   }
   
   // For each of the three images, increment its property of times it has been shown by one.
 
-  imgOne.src = allProducts[indexes[0]].src;
-  imgOne.alt = allProducts[indexes[0]].name;
-  allProducts[indexes[0]].views++;
+  imgOne.src = allProducts[currentPhotoIndexes[0]].src;
+  imgOne.alt = allProducts[currentPhotoIndexes[0]].name;
+  allProducts[currentPhotoIndexes[0]].views++;
 
-  imgTwo.src = allProducts[indexes[1]].src;
-  imgTwo.alt = allProducts[indexes[1]].name;
-  allProducts[indexes[1]].views++;
+  imgTwo.src = allProducts[currentPhotoIndexes[1]].src;
+  imgTwo.alt = allProducts[currentPhotoIndexes[1]].name;
+  allProducts[currentPhotoIndexes[1]].views++;
 
-  imgThree.src = allProducts[indexes[2]].src;
-  imgThree.alt = allProducts[indexes[2]].name;
-  allProducts[indexes[2]].views++;
+  imgThree.src = allProducts[currentPhotoIndexes[2]].src;
+  imgThree.alt = allProducts[currentPhotoIndexes[2]].name;
+  allProducts[currentPhotoIndexes[2]].views++;
 }
 
 renderImgs();
@@ -168,6 +168,9 @@ function handleClick(event) {
     if (votesAllowed === 0) {
       myContainer.removeEventListener('click', handleClick);
     }
+
+    // Call to render chart function once voting has ended
+    renderChart();
   }
 }
 
@@ -184,6 +187,24 @@ function handleShowResults(event) {
     }
   }
 }
+
+// Function to render the chart once voting is done
+function renderChart() {
+  // array to hold product names for bottom label of chart
+  let productNames = [];
+
+  // data for each dataset
+  let productClicks = [];
+  let productViews = [];
+
+  // for loop that will populate the above arrays dynamically
+  for(let i = 0; i <allProducts.length; i++) {
+    productNames.push(allProducts[i].name);
+    productClicks.push(allProducts[i].clicks);
+    productViews.push(allProducts[i].views);
+  }
+)
+
 
 // What you want to grab to listen to
 myContainer.addEventListener('click', handleClick);
