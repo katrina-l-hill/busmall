@@ -65,6 +65,13 @@ function Product(name, fileExtension = 'jpg') {
   allProducts.push(this);
 }
 
+// Step 5: Use the data that came out of local storage:
+if(retrievedProducts) {
+  allProducts = parsedProducts;
+} else {
+
+
+
 // Instantiation
 
 new Product('bag');
@@ -89,7 +96,7 @@ new Product('wine-glass');
 new Product('wireframe', 'png');
 
 console.log(allProducts);
-
+}
 
 // Executable code
 
