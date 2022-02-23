@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 // Glbal variables
 let votesAllowed = 25;
@@ -218,7 +218,7 @@ function renderChart() {
         borderColor: [
           'yellow'
         ],
-        borderWidth: 1
+        borderWidth: 1,
       },
       {
         label: '# of Views',
@@ -229,7 +229,7 @@ function renderChart() {
         borderColor: [
           'green'
         ],
-        borderWidth: 1
+        borderWidth: 1,
       }]
     },
     options: {
@@ -242,11 +242,10 @@ function renderChart() {
   };
 
   const productChart = new prodChart(ctx, chartObject);
-
+}
 
   // What you want to grab to listen to
   myContainer.addEventListener('click', handleClick);
 
   // Commented the Event Listener out for chartjs lab
   // resultsBtn.addEventListener('click', handleShowResults);
-}
