@@ -35,6 +35,7 @@ let imgThree = document.getElementById('img-three');
 
 // Canvas Element for Chart.js
 let ctx = document.getElementById('my-chart');
+let ctx2 = document.getElementById('my-chart2');
 
 // Commented these out for chart.js lab
 
@@ -174,7 +175,9 @@ function handleClick(event) {
 
     // By default, the user should be presented with 25 rounds of voting before ending the session. After voting rounds have been completed, remove the event listeners on the product.
     if (votesAllowed === 0) {
-      myContainer.removeEventListener('click', handleClick);
+      imgOne.removeEventListener('click', handleClick);
+      imgTwo.removeEventListener('click', handleClick);
+      imgThree.removeEventListener('click', handleClick);
       // Call to render chart function once voting has ended
       renderChart();
     }
@@ -221,9 +224,6 @@ function renderChart() {
       datasets: [{
         label: '# of Clicks',
         data: productClicks,
-        backgroundColor: [
-          'yellow'
-        ],
         borderColor: [
           'yellow'
         ],
@@ -252,47 +252,45 @@ function renderChart() {
     }
   };
 
-  // let chartObjectOne = {
-  //   type: 'polarArea',
-  //   data: {
-  //     labels: productNames,
-  //     datasets: [{
-  //       label: '# of Clicks',
-  //       data: productClicks,
-  //       backgroundColor: [
-  //         'green'
-  //       ],
-  //       borderColor: [
-  //         'green'
-  //       ],
-  //       borderWidth: 1,
-  //       hoverBorderColor: 'black'
-  //     },
-  //     {
-  //       label: '# of Views',
-  //       data: productViews,
-  //       backgroundColor: [
-  //         'blue'
-  //       ],
-  //       borderColor: [
-  //         'blue'
-  //       ],
-  //       borderWidth: 1,
-  //       hoverBorderColor: 'black'
-  //     }]
-  //   },
-  //   options: {
-  //     // scales: {
-  //     //   y: {
-  //     //     beginAtZero: true
-  //     //   }
-  //     // }
-  //   }
-  // };
-
-
+  let chartObjectOne = {
+    type: 'polarArea',
+    data: {
+      labels: productNames,
+      datasets: [{
+        label: '# of Clicks',
+        data: productClicks,
+        backgroundColor: [
+          'green'
+        ],
+        borderColor: [
+          'green'
+        ],
+        borderWidth: 1,
+        hoverBorderColor: 'black'
+      },
+      {
+        label: '# of Views',
+        data: productViews,
+        backgroundColor: [
+          'blue'
+        ],
+        borderColor: [
+          'blue'
+        ],
+        borderWidth: 1,
+        hoverBorderColor: 'black'
+      }]
+    },
+    options: {
+      // scales: {
+      //   y: {
+      //     beginAtZero: true
+      //   }
+      // }
+    }
+  };
   const productChart = new Chart(ctx, chartObject);
-  // const productChart = new Chart(ctx, chartObjectOne);
+  const productChart2 = new Chart(ctx2, chartObjectOne);
 }
 
 // What you want to grab to listen to
