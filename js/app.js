@@ -89,10 +89,9 @@ function getRandomIndex() {
   return Math.floor(Math.random() * allProducts.length);
 }
 
-function contains(array, item){
-  for(let i = 0; i < array.length; i++)
-  {
-    if(array[i] === item)
+function contains(array, item) {
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === item)
       return true;
   }
   return false;
@@ -101,11 +100,10 @@ function contains(array, item){
 // render images
 function renderImgs() {
   let currentPhotoIndexes = [];
-  for(let i = 0; i < 3; i++)
-  {
+  for (let i = 0; i < 3; i++) {
     let randomIndex = getRandomIndex();
     //ensure index is unique
-    
+
     // Testing conditions
     // if(contains(indexes, randomIndex))
     // {
@@ -116,18 +114,17 @@ function renderImgs() {
     //   console.log("previous set repeat");
     // }
 
-    while(contains(currentPhotoIndexes, randomIndex) || contains(previousStepPhotoIndexes, randomIndex))
-    {
+    while (contains(currentPhotoIndexes, randomIndex) || contains(previousStepPhotoIndexes, randomIndex)) {
       randomIndex = getRandomIndex();
     }
     currentPhotoIndexes.push(randomIndex);
   }
 
   previousStepPhotoIndexes = [];
-  for(let i = 0; i < currentPhotoIndexes.length; i++){
+  for (let i = 0; i < currentPhotoIndexes.length; i++) {
     previousStepPhotoIndexes.push(currentPhotoIndexes[i])
   }
-  
+
   // For each of the three images, increment its property of times it has been shown by one.
 
   imgOne.src = allProducts[currentPhotoIndexes[0]].src;
@@ -198,14 +195,71 @@ function renderChart() {
   let productViews = [];
 
   // for loop that will populate the above arrays dynamically
-  for(let i = 0; i <allProducts.length; i++) {
+  for (let i = 0; i < allProducts.length; i++) {
     productNames.push(allProducts[i].name);
     productClicks.push(allProducts[i].clicks);
     productViews.push(allProducts[i].views);
   }
-)
+
+  let chartObject = {
+    type: 'bar',
+    data: {
+      labels: productNames,
+      datasets: [{
+        label: '# of Clicks',
+        data: productClicks,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      },
+      {
+        label: '# of Views',
+        data: productViews,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+          }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  };
+
+  const productChart = new prodChart(ctx, chartObject);
 
 
-// What you want to grab to listen to
-myContainer.addEventListener('click', handleClick);
-resultsBtn.addEventListener('click', handleShowResults);
+  // What you want to grab to listen to
+  myContainer.addEventListener('click', handleClick);
+  resultsBtn.addEventListener('click', handleShowResults);
