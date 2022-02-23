@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
   <h1>Lab11 - Busmall</h1>
   <main>
@@ -14,7 +15,7 @@
         <img id="img-one" alt="" class="grid-item1 grid-img">
         <img id="img-two" alt="" class="grid-item2 grid-img">
         <img id="img-three" alt="" class="grid-item3 grid-img">
-      <!-- <img src="img-four" alt="">
+        <!-- <img src="img-four" alt="">
       <img src="img-five" alt="">
       <img src="img-six" alt="">
       <img src="img-seven" alt="">
@@ -33,13 +34,20 @@
       <img src="img-twenty" alt=""> -->
       </div>
     </section>
-      <div id="button-flex-box">
-        <div id="button-label">Click button below for results:</div>
-        <ul id="display-results-list"></ul>
-          <button id="show-results-button" type="results">View Results</button>
-      </div>
+    <!-- <div id="button-flex-box"> -->
+      <!-- Commented out for lab 11 chartjs -->
+      <!-- <div id="button-label">Click button below for results:</div>
+      <ul id="display-results-list"></ul>
+      <button id="show-results-button" type="results">View Results</button> -->
+    </div>
+    <section>
+      <canvas id="my-chart" class="data-chart"></canvas>
+      <canvas id="my-chart2" class="data-chart"></canvas>
+    </section>
 
   </main>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
   <script src="js/app.js"></script>
 </body>
+
 </html>

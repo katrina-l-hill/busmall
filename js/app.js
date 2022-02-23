@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 // Glbal variables
 let votesAllowed = 25;
@@ -6,12 +6,15 @@ let votesAllowed = 25;
 // Product storage
 let allProducts = [];
 
+let previousStepPhotoIndexes = [];
+
 // DOM references
 
-let myContainer = document.getElementById('container');
+//let myContainer = document.getElementById('container');
 let imgOne = document.getElementById('img-one');
 let imgTwo = document.getElementById('img-two');
 let imgThree = document.getElementById('img-three');
+
 // let imgFour = document.getElementById('img-four');
 // let imgFive = document.getElementById('img-five');
 // let imgSix = document.getElementById('img-six');
@@ -30,8 +33,14 @@ let imgThree = document.getElementById('img-three');
 // let imgNineteen = document.getElementById('img-nineteen');
 // let imgTwenty = document.getElementById('img-twenty');
 
-let resultsBtn = document.getElementById('show-results-button');
-let showResults = document.getElementById('display-results-list');
+// Canvas Element for Chart.js
+let ctx = document.getElementById('my-chart');
+let ctx2 = document.getElementById('my-chart2');
+
+// Commented these out for chart.js lab
+
+// let resultsBtn = document.getElementById('show-results-button');
+// let showResults = document.getElementById('display-results-list');
 
 // Create a constructor function that creates an object associated with each product, and has the following properties:
 
@@ -84,10 +93,9 @@ function getRandomIndex() {
   return Math.floor(Math.random() * allProducts.length);
 }
 
-function contains(array, item){
-  for(let i = 0; i < array.length; i++)
-  {
-    if(array[i] === item)
+function contains(array, item) {
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === item)
       return true;
   }
   return false;
@@ -95,31 +103,45 @@ function contains(array, item){
 
 // render images
 function renderImgs() {
-  let indexes = [];
-  for(let i = 0; i < 3; i++)
-  {
+  let currentPhotoIndexes = [];
+  for (let i = 0; i < 3; i++) {
     let randomIndex = getRandomIndex();
     //ensure index is unique
-    while(contains(indexes, randomIndex))
-    {
+
+    // Testing conditions
+    // if(contains(indexes, randomIndex))
+    // {
+    //   console.log("repeat picture in set");
+    // }
+    // if(contains(previousStepPhotos, randomIndex))
+    // {
+    //   console.log("previous set repeat");
+    // }
+
+    while (contains(currentPhotoIndexes, randomIndex) || contains(previousStepPhotoIndexes, randomIndex)) {
       randomIndex = getRandomIndex();
     }
-    indexes.push(randomIndex);
+    currentPhotoIndexes.push(randomIndex);
   }
-  
+
+  previousStepPhotoIndexes = [];
+  for (let i = 0; i < currentPhotoIndexes.length; i++) {
+    previousStepPhotoIndexes.push(currentPhotoIndexes[i])
+  }
+
   // For each of the three images, increment its property of times it has been shown by one.
 
-  imgOne.src = allProducts[indexes[0]].src;
-  imgOne.alt = allProducts[indexes[0]].name;
-  allProducts[indexes[0]].views++;
+  imgOne.src = allProducts[currentPhotoIndexes[0]].src;
+  imgOne.alt = allProducts[currentPhotoIndexes[0]].name;
+  allProducts[currentPhotoIndexes[0]].views++;
 
-  imgTwo.src = allProducts[indexes[1]].src;
-  imgTwo.alt = allProducts[indexes[1]].name;
-  allProducts[indexes[1]].views++;
+  imgTwo.src = allProducts[currentPhotoIndexes[1]].src;
+  imgTwo.alt = allProducts[currentPhotoIndexes[1]].name;
+  allProducts[currentPhotoIndexes[1]].views++;
 
-  imgThree.src = allProducts[indexes[2]].src;
-  imgThree.alt = allProducts[indexes[2]].name;
-  allProducts[indexes[2]].views++;
+  imgThree.src = allProducts[currentPhotoIndexes[2]].src;
+  imgThree.alt = allProducts[currentPhotoIndexes[2]].name;
+  allProducts[currentPhotoIndexes[2]].views++;
 }
 
 renderImgs();
@@ -128,6 +150,14 @@ renderImgs();
 
 function handleClick(event) {
   votesAllowed--;
+
+  // var imgs = document.getElementsByClassName('grid-img');
+  // for(let i = 0; i < imgs.length; i++)
+  // {
+  //   imgs[i].classList.remove('img-highlight');
+  // }
+  // event.target.classList.add('img-highlight');
+
 
   let imgClicked = event.target.alt; {
 
@@ -145,25 +175,122 @@ function handleClick(event) {
 
     // By default, the user should be presented with 25 rounds of voting before ending the session. After voting rounds have been completed, remove the event listeners on the product.
     if (votesAllowed === 0) {
-      myContainer.removeEventListener('click', handleClick);
+      imgOne.removeEventListener('click', handleClick);
+      imgTwo.removeEventListener('click', handleClick);
+      imgThree.removeEventListener('click', handleClick);
+      // Call to render chart function once voting has ended
+      renderChart();
     }
   }
 }
 
 // Button to show results, render list items. Create a property attached to the constructor function itself that keeps track of all the products that are currently being considered.
 
-function handleShowResults(event) {
-  // if no more results, then render a list
+// Commented this function out for chartjs lab
 
-  if (votesAllowed === 0) {
-    for (let i = 0; i < allProducts.length; i++) {
-      let li = document.createElement('li');
-      li.textContent = `${allProducts[i].name} was viewed ${allProducts[i].views} times, and was voted for ${allProducts[i].clicks} times.`;
-      showResults.appendChild(li);
-    }
+// function handleShowResults(event) {
+//   // if no more results, then render a list
+
+//   if (votesAllowed === 0) {
+//     for (let i = 0; i < allProducts.length; i++) {
+//       let li = document.createElement('li');
+//       li.textContent = `${allProducts[i].name} was viewed ${allProducts[i].views} times, and was voted for ${allProducts[i].clicks} times.`;
+//       showResults.appendChild(li);
+//     }
+//   }
+// }
+
+// Function to render the chart once voting is done
+function renderChart() {
+  console.log("rendering chart...");
+  // array to hold product names for bottom label of chart
+  let productNames = [];
+
+  // data for each dataset
+  let productClicks = [];
+  let productViews = [];
+
+  // for loop that will populate the above arrays dynamically
+  for (let i = 0; i < allProducts.length; i++) {
+    productNames.push(allProducts[i].name);
+    productClicks.push(allProducts[i].clicks);
+    productViews.push(allProducts[i].views);
   }
+
+  let chartObject = {
+    type: 'bar',
+    data: {
+      labels: productNames,
+      datasets: [{
+        label: '# of Clicks',
+        data: productClicks,
+        borderColor: [
+          'yellow'
+        ],
+        borderWidth: 1,
+        hoverBorderColor: 'black'
+      },
+      {
+        label: '# of Views',
+        data: productViews,
+        backgroundColor: [
+          'purple'
+        ],
+        borderColor: [
+          'purple'
+        ],
+        borderWidth: 1,
+        hoverBorderColor: 'black'
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  };
+
+  let chartObjectOne = {
+    type: 'pie',
+    data: {
+      labels: productNames,
+      datasets: [{
+        label: '# of Clicks',
+        data: productClicks,
+        backgroundColor: [
+          'green'
+        ],
+        borderColor: [
+          'black'
+        ],
+        borderWidth: 1,
+        hoverBorderColor: 'black'
+      },
+      {
+        label: '# of Views',
+        data: productViews,
+        backgroundColor: [
+          'blue'
+        ],
+        borderColor: [
+          'black'
+        ],
+        borderWidth: 1,
+        hoverBorderColor: 'black'
+      }]
+    },
+  
+  };
+  const productChart = new Chart(ctx, chartObject);
+  const productChart2 = new Chart(ctx2, chartObjectOne);
 }
 
 // What you want to grab to listen to
-myContainer.addEventListener('click', handleClick);
-resultsBtn.addEventListener('click', handleShowResults);
+imgOne.addEventListener('click', handleClick);
+imgTwo.addEventListener('click', handleClick);
+imgThree.addEventListener('click', handleClick);
+
+  // Commented the Event Listener out for chartjs lab
+  // resultsBtn.addEventListener('click', handleShowResults);
