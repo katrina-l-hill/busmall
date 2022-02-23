@@ -37,6 +37,10 @@ let imgThree = document.getElementById('img-three');
 let ctx = document.getElementById('my-chart');
 let ctx2 = document.getElementById('my-chart2');
 
+// Step 3: Get data out of local storage:
+let retrievedProducts = localStorage.getItem('my-chart');
+console.log('retrieved products', retrievedProducts);
+
 // Commented these out for chart.js lab
 
 // let resultsBtn = document.getElementById('show-results-button');
