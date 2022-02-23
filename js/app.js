@@ -38,8 +38,11 @@ let ctx = document.getElementById('my-chart');
 let ctx2 = document.getElementById('my-chart2');
 
 // Step 3: Get data out of local storage:
-let retrievedProducts = localStorage.getItem('my-chart');
+let retrievedProducts = localStorage.getItem('products');
 console.log('retrieved products', retrievedProducts);
+
+// Step 4: Pass the data for our code to read:
+let parsedProducts = JSON.parse(retrievedProducts);
 
 // Commented these out for chart.js lab
 
