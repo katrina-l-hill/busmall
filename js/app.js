@@ -263,7 +263,7 @@ function renderChart() {
           'green'
         ],
         borderColor: [
-          'green'
+          'black'
         ],
         borderWidth: 1,
         hoverBorderColor: 'black'
@@ -275,7 +275,7 @@ function renderChart() {
           'blue'
         ],
         borderColor: [
-          'blue'
+          'black'
         ],
         borderWidth: 1,
         hoverBorderColor: 'black'
