@@ -216,7 +216,7 @@ function renderChart() {
           'red'
         ],
         borderColor: [
-          'yellow',
+          'yellow'
         ],
         borderWidth: 1
       },
@@ -224,10 +224,10 @@ function renderChart() {
         label: '# of Views',
         data: productViews,
         backgroundColor: [
-          'purple',
+          'purple'
         ],
         borderColor: [
-          'green',
+          'green'
         ],
         borderWidth: 1
       }]
@@ -249,3 +249,4 @@ function renderChart() {
 
   // Commented the Event Listener out for chartjs lab
   // resultsBtn.addEventListener('click', handleShowResults);
+}
