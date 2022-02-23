@@ -10,7 +10,7 @@ let previousStepPhotoIndexes = [];
 
 // DOM references
 
-let myContainer = document.getElementById('container');
+//let myContainer = document.getElementById('container');
 let imgOne = document.getElementById('img-one');
 let imgTwo = document.getElementById('img-two');
 let imgThree = document.getElementById('img-three');
@@ -253,7 +253,7 @@ function renderChart() {
   };
 
   let chartObjectOne = {
-    type: 'polarArea',
+    type: 'pie',
     data: {
       labels: productNames,
       datasets: [{
@@ -281,13 +281,7 @@ function renderChart() {
         hoverBorderColor: 'black'
       }]
     },
-    options: {
-      // scales: {
-      //   y: {
-      //     beginAtZero: true
-      //   }
-      // }
-    }
+  
   };
   const productChart = new Chart(ctx, chartObject);
   const productChart2 = new Chart(ctx2, chartObjectOne);
