@@ -222,12 +222,13 @@ function renderChart() {
         label: '# of Clicks',
         data: productClicks,
         backgroundColor: [
-          'red'
+          'yellow'
         ],
         borderColor: [
           'yellow'
         ],
         borderWidth: 1,
+        hoverBorderColor: 'black'
       },
       {
         label: '# of Views',
@@ -236,9 +237,10 @@ function renderChart() {
           'purple'
         ],
         borderColor: [
-          'green'
+          'purple'
         ],
         borderWidth: 1,
+        hoverBorderColor: 'black'
       }]
     },
     options: {
@@ -249,6 +251,45 @@ function renderChart() {
       }
     }
   };
+
+  let chartObject = {
+    type: 'polarArea',
+    data: {
+      labels: productNames,
+      datasets: [{
+        label: '# of Clicks',
+        data: productClicks,
+        backgroundColor: [
+          'green'
+        ],
+        borderColor: [
+          'green'
+        ],
+        borderWidth: 1,
+        hoverBorderColor: 'black'
+      },
+      {
+        label: '# of Views',
+        data: productViews,
+        backgroundColor: [
+          'blue'
+        ],
+        borderColor: [
+          'blue'
+        ],
+        borderWidth: 1,
+        hoverBorderColor: 'black'
+      }]
+    },
+    options: {
+      // scales: {
+      //   y: {
+      //     beginAtZero: true
+      //   }
+      // }
+    }
+  };
+
 
   const productChart = new Chart(ctx, chartObject);
 }
