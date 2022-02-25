@@ -1,7 +1,18 @@
+html {
+  background-color:lightskyblue;
+}
+
 h1 {
   font-size: 2.5em;
   margin: 1em 0em;
   text-align: center;
+  font-family: cursive;
+  color: maroon;
+}
+
+h2 {
+  margin-left: 1.5em;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .grid-container {
@@ -68,3 +79,8 @@ button {
   /* margin-top: 4px;
   margin-bottom: 4px; */
 }
+
+/* .my-chart {
+  margin-top: 1px;
+  margin-bottom: 1px
+} */
